@@ -3,7 +3,7 @@ import { macroCommand } from './macros/roll-assimilacao.mjs';
 const MACRO_NAME = "Rolagem de Assimilação";
 
 async function setupMacro() {
-    const moduleVersion = game.modules.get("assimilacao-dice-roller").version;
+    const moduleVersion = game.system.version;
     const existing = game.macros.find(m => m.name === MACRO_NAME);
 
     if (existing?.getFlag("assimilation-rpg", "version") === moduleVersion) return;
