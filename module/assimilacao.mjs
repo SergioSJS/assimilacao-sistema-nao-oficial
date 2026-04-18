@@ -2,6 +2,7 @@ import "./dice/assimilacao-roll.mjs";
 import "./dice/macro-setup.mjs";
 import { InfectadoData } from "./data/actor-infectado.mjs";
 import { ItemInventarioData } from "./data/item-inventario.mjs";
+import { registerSheets } from "./helpers/sheet-registration.mjs";
 
 Hooks.once("init", () => {
     console.log("Assimilação RPG | Inicializando O Sistema");
@@ -10,5 +11,6 @@ Hooks.once("init", () => {
     CONFIG.Actor.dataModels.infectado = InfectadoData;
     CONFIG.Item.dataModels["item-inventario"] = ItemInventarioData;
     
-    // Registro de Sheets vai aqui futuramente
+    // Registro de Sheets
+    registerSheets();
 });
