@@ -1,4 +1,4 @@
-import { DieAssimilacaoD6, DieAssimilacaoD10, DieAssimilacaoD12 } from './die.js';
+import { DieAssimilacaoD6, DieAssimilacaoD10, DieAssimilacaoD12 } from './die.mjs';
 
 Hooks.once("init", () => {
     CONFIG.Dice.terms["a"] = DieAssimilacaoD6;

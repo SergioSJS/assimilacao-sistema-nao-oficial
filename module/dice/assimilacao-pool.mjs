@@ -81,7 +81,7 @@ export async function submitAssimilacaoRoll({ actor, label, nInstinto, nAptidao 
     const messageData = {
         speaker: ChatMessage.getSpeaker({ actor }),
         content,
-        type: CONST.CHAT_MESSAGE_TYPES?.ROLL || 5, // 5 = Roll fallback
+        // Em Foundry V12+, messages detectam automaticamente o estilo como "roll" quando o array "rolls" é passado.
         rolls: [roll]
     };
 

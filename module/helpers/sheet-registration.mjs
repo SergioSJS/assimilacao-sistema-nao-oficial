@@ -1,5 +1,5 @@
-import { InfectadoSheet } from "./sheets/actor-infectado-sheet.mjs";
-import { ItemInventarioSheet } from "./sheets/item-inventario-sheet.mjs";
+import { InfectadoSheet } from "../sheets/actor-infectado-sheet.mjs";
+import { ItemInventarioSheet } from "../sheets/item-inventario-sheet.mjs";
 
 export function registerSheets() {
     Actors.unregisterSheet("core", ActorSheet);
