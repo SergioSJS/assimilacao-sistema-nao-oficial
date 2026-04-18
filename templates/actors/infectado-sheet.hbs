@@ -51,27 +51,27 @@
                         <h3>Instintos <i class="fas fa-square" style="color:var(--assimilacao-red);"></i></h3>
                         <div class="grid-3col instintos-grid">
                             <div class="stat-box">
-                                <label>Influência</label>
+                                <label><a class="roll-instinto" data-instinto="influencia"><i class="fas fa-dice-d6"></i> Influência</a></label>
                                 <input type="number" name="system.instintos.influencia" value="{{system.instintos.influencia}}" min="1" max="5">
                             </div>
                             <div class="stat-box">
-                                <label>Percepção</label>
+                                <label><a class="roll-instinto" data-instinto="percepcao"><i class="fas fa-dice-d6"></i> Percepção</a></label>
                                 <input type="number" name="system.instintos.percepcao" value="{{system.instintos.percepcao}}" min="1" max="5">
                             </div>
                             <div class="stat-box">
-                                <label>Potência</label>
+                                <label><a class="roll-instinto" data-instinto="potencia"><i class="fas fa-dice-d6"></i> Potência</a></label>
                                 <input type="number" name="system.instintos.potencia" value="{{system.instintos.potencia}}" min="1" max="5">
                             </div>
                             <div class="stat-box">
-                                <label>Reação</label>
+                                <label><a class="roll-instinto" data-instinto="reacao"><i class="fas fa-dice-d6"></i> Reação</a></label>
                                 <input type="number" name="system.instintos.reacao" value="{{system.instintos.reacao}}" min="1" max="5">
                             </div>
                             <div class="stat-box">
-                                <label>Resolução</label>
+                                <label><a class="roll-instinto" data-instinto="resolucao"><i class="fas fa-dice-d6"></i> Resolução</a></label>
                                 <input type="number" name="system.instintos.resolucao" value="{{system.instintos.resolucao}}" min="1" max="5">
                             </div>
                             <div class="stat-box">
-                                <label>Sagacidade</label>
+                                <label><a class="roll-instinto" data-instinto="sagacidade"><i class="fas fa-dice-d6"></i> Sagacidade</a></label>
                                 <input type="number" name="system.instintos.sagacidade" value="{{system.instintos.sagacidade}}" min="1" max="5">
                             </div>
                         </div>
@@ -81,9 +81,18 @@
                         <h3>Conhecimentos <i class="fas fa-diamond" style="color:grey;"></i></h3>
                         <div class="grid-3col">
                             {{#each system.conhecimentos as |val key|}}
-                            <div class="stat-box outline-box">
-                                <label>{{key}}</label>
-                                <input type="number" name="system.conhecimentos.{{key}}" value="{{val}}" min="0" max="5">
+                            <div class="stat-box outline-box" style="display:flex; flex-direction:column;">
+                                <label><a class="roll-aptidao" data-aptidao="{{key}}" data-categoria="conhecimentos"><i class="fas fa-dice-d10"></i> {{key}}</a></label>
+                                <select class="instinto-combinar" style="flex:1; width:100%; border:1px solid #ccc; font-size:10px;">
+                                    <option value="">(Instinto)</option>
+                                    <option value="influencia">Influência</option>
+                                    <option value="percepcao">Percepção</option>
+                                    <option value="potencia">Potência</option>
+                                    <option value="reacao">Reação</option>
+                                    <option value="resolucao">Resolução</option>
+                                    <option value="sagacidade">Sagacidade</option>
+                                </select>
+                                <input type="number" name="system.conhecimentos.{{key}}" value="{{val}}" min="0" max="5" style="margin-top:2px;">
                             </div>
                             {{/each}}
                         </div>
@@ -93,9 +102,18 @@
                         <h3>Práticas <i class="fas fa-diamond" style="color:grey;"></i></h3>
                         <div class="grid-3col">
                             {{#each system.praticas as |val key|}}
-                            <div class="stat-box outline-box-red">
-                                <label>{{key}}</label>
-                                <input type="number" name="system.praticas.{{key}}" value="{{val}}" min="0" max="5">
+                            <div class="stat-box outline-box-red" style="display:flex; flex-direction:column;">
+                                <label><a class="roll-aptidao" data-aptidao="{{key}}" data-categoria="praticas"><i class="fas fa-dice-d10"></i> {{key}}</a></label>
+                                <select class="instinto-combinar" style="flex:1; width:100%; border:1px solid #ccc; font-size:10px;">
+                                    <option value="">(Instinto)</option>
+                                    <option value="influencia">Influência</option>
+                                    <option value="percepcao">Percepção</option>
+                                    <option value="potencia">Potência</option>
+                                    <option value="reacao">Reação</option>
+                                    <option value="resolucao">Resolução</option>
+                                    <option value="sagacidade">Sagacidade</option>
+                                </select>
+                                <input type="number" name="system.praticas.{{key}}" value="{{val}}" min="0" max="5" style="margin-top:2px;">
                             </div>
                             {{/each}}
                         </div>

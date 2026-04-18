@@ -1,0 +1,77 @@
+<div class="assimilacao-roll">
+    <div class="roll-header">
+        <h3 class="title">{{label}}</h3>
+        <p class="subtitle">{{tipoLabel}} - {{actor}}</p>
+    </div>
+
+    <div class="roll-pool">
+        {{#each pool}}
+        <div class="die-icon {{#if this.isBest}}best-die{{/if}}">
+            <span class="die-type">{{this.faces}}</span>
+            <span class="die-símbolos">
+                {{#if this.a}}<span class="a">A:{{this.a}}</span>{{/if}}
+                {{#if this.b}}<span class="b">B:{{this.b}}</span>{{/if}}
+                {{#if this.c}}<span class="c">C:{{this.c}}</span>{{/if}}
+                {{#unless this.a}}{{#unless this.b}}{{#unless this.c}}<span class="c">C:?</span>{{/unless}}{{/unless}}{{/unless}}
+            </span>
+        </div>
+        {{/each}}
+    </div>
+
+    {{#if melhorDado}}
+    <div class="roll-resultado-final">
+        <h4>Melhor Resultado</h4>
+        <div class="resultado-stats">
+            <div class="stat a"><strong>Sucessos (A):</strong> {{melhorDado.a}}</div>
+            <div class="stat b"><strong>Adaptação (B):</strong> {{melhorDado.b}}</div>
+            <div class="stat c"><strong>Pressão (C):</strong> {{melhorDado.c}}</div>
+        </div>
+    </div>
+    {{/if}}
+</div>
+
+<style>
+.assimilacao-roll {
+    font-family: var(--font-primary, sans-serif);
+    border: 2px solid #8B2516;
+    border-radius: 5px;
+    background: #FDF9F1;
+    padding: 10px;
+}
+.assimilacao-roll .roll-header {
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+.assimilacao-roll .roll-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.assimilacao-roll .die-icon {
+    width: 60px; height: 60px;
+    border: 1px solid #ccc; background: white;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border-radius: 5px;
+    position: relative;
+    font-size: 12px;
+}
+.assimilacao-roll .die-icon.best-die {
+    border: 3px solid #8B2516;
+    box-shadow: 0 0 5px rgba(139,37,22,0.5);
+}
+.assimilacao-roll .die-type { font-weight: bold; color: #8E5A2D; font-size: 16px;}
+.assimilacao-roll .die-símbolos {
+    display: flex; gap: 3px; font-weight: bold; font-size: 10px;
+}
+.assimilacao-roll .die-símbolos .a { color: green; }
+.assimilacao-roll .die-símbolos .b { color: blue; }
+.assimilacao-roll .die-símbolos .c { color: red; }
+
+.assimilacao-roll .roll-resultado-final {
+    background: #EED; padding: 10px; border-radius: 5px; text-align: center;
+}
+.roll-resultado-final .resultado-stats { display: flex; justify-content: space-around; font-size: 13px;}
+</style>
