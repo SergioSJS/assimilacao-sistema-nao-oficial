@@ -132,9 +132,11 @@
                                 <span class="badge">{{nvl.num}}</span>
                                 <strong>{{nvl.nome}}</strong>
                             </div>
-                            <div class="saude-dots">
-                                <!-- Placeholders for Phase 4 hearts -->
-                                Gasto neste nível: <input type="number" name="system.saude.nivel{{nvl.num}}" value="{{nvl.gasto}}" style="width:30px;">
+                            <div class="saude-dots" data-nivel="nivel{{nvl.num}}">
+                                {{#each nvl.dots as |dot|}}
+                                    <i class="fas fa-heart saude-ponto {{#if dot.gasto}}gasto{{else}}livre{{/if}}" data-index="{{dot.index}}" title="Dano recebido"></i>
+                                {{/each}}
+                                <input type="hidden" name="system.saude.nivel{{nvl.num}}" value="{{nvl.gasto}}">
                             </div>
                         </div>
                         {{/each}}
@@ -145,12 +147,11 @@
             <hr>
             <!-- CABO DE GUERRA BELOW SAUDE/APTIDOES -->
             <div class="cabo-guerra-box">
-                <div class="cg-label d-label">Determinação</div>
+                <div class="cg-label d-label" title="{{system.pontosDeterminacao}} Pontos de Determinação disponíveis">Determinação: {{system.determinacaoNivel}}</div>
                 <div class="cg-slider">
-                    <!-- Placeholder slider for phase 4 -->
-                    <input type="range" name="system.determinacaoNivel" min="0" max="10" value="{{system.determinacaoNivel}}">
+                    <input type="range" name="system.determinacaoNivel" min="0" max="10" value="{{system.determinacaoNivel}}" data-dtype="Number">
                 </div>
-                <div class="cg-label a-label">Assimilação</div>
+                <div class="cg-label a-label" title="{{system.pontosAssimilacao}} Pontos de Assimilação acumulados">Assimilação: {{system.assimilacaoNivel}}</div>
             </div>
         </div>
 

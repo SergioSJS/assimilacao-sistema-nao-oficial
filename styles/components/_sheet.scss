@@ -192,9 +192,21 @@
     &:nth-child(n+3) .saude-label { background-color: #a76b4a; .badge { color: #a76b4a; } } /* Laceracao / Ferimentos */
     &:nth-child(n+5) .saude-label { background-color: var(--assimilacao-red); .badge { color: var(--assimilacao-red); } } /* Debilitacao / Incap. */
     .saude-dots {
-      padding: 5px;
-      background: rgba(255,255,255,0.5);
+      padding: 8px;
+      background: rgba(255,255,255,0.6);
       border-radius: 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      
+      .saude-ponto {
+        font-size: 18px;
+        cursor: pointer;
+        transition: transform 0.1s;
+        &:hover { transform: scale(1.2); }
+        &.livre { color: rgba(0,0,0,0.1); text-shadow: 0 0 1px rgba(0,0,0,0.3); }
+        &.gasto { color: var(--assimilacao-red); }
+      }
     }
   }
 

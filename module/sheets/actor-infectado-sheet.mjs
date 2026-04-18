@@ -15,8 +15,15 @@ export class InfectadoSheet extends ActorSheet {
         const data = super.getData();
         data.system = data.actor.system;
         
-        // Arrays de auxílio para o HBS
-        data.saudeNiveis = data.system.saudeNiveisArray;
+        // Arrays de auxílio para o HBS, agora criando array iterável para os pontinhos de vida
+        data.saudeNiveis = data.system.saudeNiveisArray.map(nvl => {
+            // Conta de 0 até max-1. Se index < nvl.gasto, está preenchido (dano recebido/gasto)
+            // No Assimilação os PVs na verdade contabilizam "Dano sofrido". Portanto, gasto = marcado.
+            nvl.dots = Array.from({length: nvl.max}, (_, i) => {
+                return { index: i, gasto: i < nvl.gasto };
+            });
+            return nvl;
+        });
         
         data.geracaoOptions = {
             "preCollapse": "Pré-Colapso",
@@ -33,6 +40,29 @@ export class InfectadoSheet extends ActorSheet {
         // Listeners das rolagens
         html.find(".roll-instinto").click(this._onRollInstinto.bind(this));
         html.find(".roll-aptidao").click(this._onRollAptidao.bind(this));
+        
+        // Listener de Saúde
+        html.find(".saude-ponto").click(this._onSaudeClick.bind(this));
+    }
+
+    async _onSaudeClick(event) {
+        event.preventDefault();
+        const element = event.currentTarget;
+        const nivelKey = $(element).closest(".saude-dots").data("nivel"); // ex: "nivel6"
+        const index = parseInt(element.dataset.index); // 0-based
+        const isGasto = $(element).hasClass("gasto");
+
+        const gastoAtual = this.actor.system.saude[nivelKey];
+        let novoGasto = index + 1; // Ao clicar na posição 'index', preenche todos até ali
+
+        // Se clicou na exatamente última bolinha que já estava preenchida, remove ela
+        if (isGasto && gastoAtual === novoGasto) {
+            novoGasto = index; 
+        }
+
+        await this.actor.update({
+            [`system.saude.${nivelKey}`]: novoGasto
+        });
     }
 
     async _onRollInstinto(event) {
