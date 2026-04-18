@@ -42,11 +42,11 @@ export class InfectadoSheet extends ActorSheet {
         super.activateListeners(html);
         
         // Listeners das rolagens
-        html.find(".roll-instinto").click(this._onRollInstinto.bind(this));
-        html.find(".roll-aptidao").click(this._onRollAptidao.bind(this));
+        html.find(".roll-instinto").off("click").click(this._onRollInstinto.bind(this));
+        html.find(".roll-aptidao").off("click").click(this._onRollAptidao.bind(this));
         
         // Listener de Saúde
-        html.find(".saude-ponto").click(this._onSaudeClick.bind(this));
+        html.find(".saude-ponto").off("click").click(this._onSaudeClick.bind(this));
 
         // Listeners de Inventário
         html.find('.item-create').click(this._onItemCreate.bind(this));

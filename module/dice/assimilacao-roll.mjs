@@ -102,13 +102,6 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
     _patchChatFormula(message, html);
 });
 
-// v12: legacy hook with jQuery; skip on v13+ to avoid double-patching
-Hooks.on("renderChatMessage", (message, html) => {
-    if (game.release?.generation >= 13) return;
-    const element = html instanceof HTMLElement ? html : html[0];
-    if (element) _patchChatFormula(message, element);
-});
-
 function _patchChatFormula(message, element) {
     if (!message.rolls?.some(roll => roll.formula.match(/d[abc]/))) return;
 

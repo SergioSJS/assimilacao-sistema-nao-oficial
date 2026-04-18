@@ -63,10 +63,13 @@
       &:focus { border-bottom: 1px solid var(--assimilacao-dark); outline: none; box-shadow: none; }
     }
 
-    .charname input {
-      font-size: 28px;
-      font-weight: bold;
-      border-bottom: 2px solid var(--assimilacao-brown);
+    .charname {
+      margin: 0;
+      input {
+        font-size: 28px;
+        font-weight: bold;
+        border-bottom: 2px solid var(--assimilacao-brown);
+      }
     }
 
     .propositos {

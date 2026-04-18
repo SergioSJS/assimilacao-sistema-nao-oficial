@@ -16,22 +16,28 @@ export async function submitAssimilacaoRoll({ actor, label, nInstinto, nAptidao 
     if (totalD6 > 0) formulaParts.push(`${totalD6}da`);
     if (totalD10 > 0) formulaParts.push(`${totalD10}db`);
     
-    const roll = await new Roll(formulaParts.join(" + ")).evaluate({ async: true });
-
-    // Se houver integração com Dice So Nice!, isto força a animação antes de enviar a mensagem normal
-    if (game.dice3d) {
-        await game.dice3d.showForRoll(roll, game.user, true);
-    }
+    const roll = await new Roll(formulaParts.join(" + ")).evaluate();
 
     // Parseia os resultados
     const poolRenderData = [];
     let melhorDado = null;
+
+    const getDieImage = (isD6, resultNum) => {
+        if (resultNum === 1 || resultNum === 2) return "systems/assimilacao/assets/images/vazio.png";
+        const prefix = isD6 ? "D6" : "D10";
+        if (resultNum === 3) return `systems/assimilacao/assets/images/${prefix}_3.png`;
+        if (resultNum === 4 || resultNum === 5) return `systems/assimilacao/assets/images/${prefix}_4_5.png`;
+        if (isD6 && resultNum === 6) return `systems/assimilacao/assets/images/${prefix}_6.png`;
+        if (!isD6 && resultNum >= 6) return `systems/assimilacao/assets/images/${prefix}_${resultNum}.png`;
+        return "systems/assimilacao/assets/images/vazio.png";
+    };
 
     roll.dice.forEach(die => {
         const isD6 = die.faces === 6;
         const faceMap = isD6 ? D6_FACES : D10_FACES;
         // die.results contains an array of { result: number, active: boolean }
         die.results.forEach(res => {
+            if (!res.active) return;
             const resultNum = res.result;
             const idx = resultNum - 1;
             const abstrato = faceMap[idx] || { a:0, b:0, c:0 };
@@ -43,6 +49,7 @@ export async function submitAssimilacaoRoll({ actor, label, nInstinto, nAptidao 
                 a: abstrato.a,
                 b: abstrato.b,
                 c: abstrato.c,
+                imgUrl: getDieImage(isD6, resultNum),
                 classeCSS: isD6 ? "dieassimilacaod6" : "dieassimilacaod10"
             };
 
@@ -76,7 +83,8 @@ export async function submitAssimilacaoRoll({ actor, label, nInstinto, nAptidao 
         melhorDado
     };
 
-    const content = await renderTemplate("systems/assimilacao/templates/chat/roll-resultado.hbs", templateData);
+    const templateRenderer = foundry.applications?.handlebars?.renderTemplate || renderTemplate;
+    const content = await templateRenderer("systems/assimilacao/templates/chat/roll-resultado.hbs", templateData);
 
     const messageData = {
         speaker: ChatMessage.getSpeaker({ actor }),

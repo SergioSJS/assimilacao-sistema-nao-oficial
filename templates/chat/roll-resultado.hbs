@@ -6,13 +6,9 @@
 
     <div class="roll-pool">
         {{#each pool}}
-        <div class="die-icon {{#if this.isBest}}best-die{{/if}}">
-            <span class="die-type">{{this.faces}}</span>
+        <div class="die-icon {{#if this.isBest}}best-die{{/if}}" title="Forte (A): {{this.a}} | Fraco (B): {{this.b}} | Complicação (C): {{this.c}}">
             <span class="die-símbolos">
-                {{#if this.a}}<span class="a">A:{{this.a}}</span>{{/if}}
-                {{#if this.b}}<span class="b">B:{{this.b}}</span>{{/if}}
-                {{#if this.c}}<span class="c">C:{{this.c}}</span>{{/if}}
-                {{#unless this.a}}{{#unless this.b}}{{#unless this.c}}<span class="c">C:?</span>{{/unless}}{{/unless}}{{/unless}}
+                <img src="{{this.imgUrl}}" width="40" height="40" style="border:none; margin:0;" />
             </span>
         </div>
         {{/each}}
