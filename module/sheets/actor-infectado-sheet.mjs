@@ -30,6 +30,10 @@ export class InfectadoSheet extends ActorSheet {
             "collapse": "Colapso",
             "postCollapse": "Pós-Colapso"
         };
+
+        // Inventário: filtra items do ator based on their location
+        data.itemsCorpo = data.actor.items.filter(i => i.system.localizacao === "corpo");
+        data.itemsMochila = data.actor.items.filter(i => i.system.localizacao === "mochila");
         
         return data;
     }
@@ -43,6 +47,35 @@ export class InfectadoSheet extends ActorSheet {
         
         // Listener de Saúde
         html.find(".saude-ponto").click(this._onSaudeClick.bind(this));
+
+        // Listeners de Inventário
+        html.find('.item-create').click(this._onItemCreate.bind(this));
+        html.find('.item-edit').click(this._onItemEdit.bind(this));
+        html.find('.item-delete').click(this._onItemDelete.bind(this));
+    }
+
+    async _onItemCreate(event) {
+        event.preventDefault();
+        const localizacao = event.currentTarget.dataset.loc || "mochila";
+        const itemData = {
+            name: "Novo Item",
+            type: "item-inventario",
+            system: { localizacao: localizacao }
+        };
+        return await Item.create(itemData, {parent: this.actor});
+    }
+
+    _onItemEdit(event) {
+        event.preventDefault();
+        const li = $(event.currentTarget).closest(".item");
+        const item = this.actor.items.get(li.data("itemId"));
+        item.sheet.render(true);
+    }
+
+    _onItemDelete(event) {
+        event.preventDefault();
+        const li = $(event.currentTarget).closest(".item");
+        this.actor.deleteEmbeddedDocuments("Item", [li.data("itemId")]);
     }
 
     async _onSaudeClick(event) {
