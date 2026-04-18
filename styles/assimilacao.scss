@@ -1,0 +1,10 @@
+@import "assimilacao-dice.scss";
+
+// Variáveis e mixins base para o sistema Assimilação RPG
+:root {
+  --assimilacao-red: #c63527;
+  --assimilacao-blue: #2a5a7d;
+  --assimilacao-dark: #121212;
+}
+
+// O restante da estilização (fonte, layout da ficha) entrará nas próximas fases.

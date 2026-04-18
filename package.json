@@ -1,0 +1,14 @@
+{
+  "name": "assimilacao-fvtt",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build:css": "sass styles/assimilacao.scss styles/assimilacao.css --style=compressed --no-source-map",
+    "watch:css": "sass styles/assimilacao.scss styles/assimilacao.css --watch",
+    "lint": "eslint module/**/*.mjs --fix"
+  },
+  "devDependencies": {
+    "sass": "^1.70.0",
+    "eslint": "^8.57.0"
+  }
+}
