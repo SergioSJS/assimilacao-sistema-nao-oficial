@@ -15,17 +15,17 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
         labels: [
             'systems/assimilacao/assets/images/vazio.png',
             'systems/assimilacao/assets/images/vazio.png',
-            'systems/assimilacao/assets/images/D6_3.png',
-            'systems/assimilacao/assets/images/D6_4_5.png',
-            'systems/assimilacao/assets/images/D6_4_5.png',
+            'systems/assimilacao/assets/images/D6_3_4.png',
+            'systems/assimilacao/assets/images/D6_3_4.png',
+            'systems/assimilacao/assets/images/D6_5.png',
             'systems/assimilacao/assets/images/D6_6.png'
         ],
         bumpMaps: [
             'systems/assimilacao/assets/images/vazio_bump.png',
             'systems/assimilacao/assets/images/vazio_bump.png',
-            'systems/assimilacao/assets/images/D6_3_bump.png',
-            'systems/assimilacao/assets/images/D6_4_5_bump.png',
-            'systems/assimilacao/assets/images/D6_4_5_bump.png',
+            'systems/assimilacao/assets/images/D6_3_4_bump.png',
+            'systems/assimilacao/assets/images/D6_3_4_bump.png',
+            'systems/assimilacao/assets/images/D6_5_bump.png',
             'systems/assimilacao/assets/images/D6_6_bump.png'
         ],
         system: "assimilacao",
@@ -37,9 +37,9 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
         labels: [
             'systems/assimilacao/assets/images/vazio.png',
             'systems/assimilacao/assets/images/vazio.png',
-            'systems/assimilacao/assets/images/D10_3.png',
-            'systems/assimilacao/assets/images/D10_4_5.png',
-            'systems/assimilacao/assets/images/D10_4_5.png',
+            'systems/assimilacao/assets/images/D10_3_4.png',
+            'systems/assimilacao/assets/images/D10_3_4.png',
+            'systems/assimilacao/assets/images/D10_5.png',
             'systems/assimilacao/assets/images/D10_6.png',
             'systems/assimilacao/assets/images/D10_7.png',
             'systems/assimilacao/assets/images/D10_8.png',
@@ -49,9 +49,9 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
         bumpMaps: [
             'systems/assimilacao/assets/images/vazio_bump.png',
             'systems/assimilacao/assets/images/vazio_bump.png',
-            'systems/assimilacao/assets/images/D10_3_bump.png',
-            'systems/assimilacao/assets/images/D10_4_5_bump.png',
-            'systems/assimilacao/assets/images/D10_4_5_bump.png',
+            'systems/assimilacao/assets/images/D10_3_4_bump.png',
+            'systems/assimilacao/assets/images/D10_3_4_bump.png',
+            'systems/assimilacao/assets/images/D10_5_bump.png',
             'systems/assimilacao/assets/images/D10_6_bump.png',
             'systems/assimilacao/assets/images/D10_7_bump.png',
             'systems/assimilacao/assets/images/D10_8_bump.png',
@@ -67,9 +67,9 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
         labels: [
             'systems/assimilacao/assets/images/vazio.png',
             'systems/assimilacao/assets/images/vazio.png',
-            'systems/assimilacao/assets/images/D12_3.png',
-            'systems/assimilacao/assets/images/D12_4_5.png',
-            'systems/assimilacao/assets/images/D12_4_5.png',
+            'systems/assimilacao/assets/images/D12_3_4.png',
+            'systems/assimilacao/assets/images/D12_3_4.png',
+            'systems/assimilacao/assets/images/D12_5.png',
             'systems/assimilacao/assets/images/D12_6.png',
             'systems/assimilacao/assets/images/D12_7.png',
             'systems/assimilacao/assets/images/D12_8.png',
@@ -81,9 +81,9 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
         bumpMaps: [
             'systems/assimilacao/assets/images/vazio_bump.png',
             'systems/assimilacao/assets/images/vazio_bump.png',
-            'systems/assimilacao/assets/images/D12_3_bump.png',
-            'systems/assimilacao/assets/images/D12_4_5_bump.png',
-            'systems/assimilacao/assets/images/D12_4_5_bump.png',
+            'systems/assimilacao/assets/images/D12_3_4_bump.png',
+            'systems/assimilacao/assets/images/D12_3_4_bump.png',
+            'systems/assimilacao/assets/images/D12_5_bump.png',
             'systems/assimilacao/assets/images/D12_6_bump.png',
             'systems/assimilacao/assets/images/D12_7_bump.png',
             'systems/assimilacao/assets/images/D12_8_bump.png',
@@ -97,7 +97,7 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
     });
 });
 
-// v13+: ChatMessage uses ApplicationV2, html is HTMLElement
+// v13+: renderChatMessageHTML passa HTMLElement nativo
 Hooks.on("renderChatMessageHTML", (message, html) => {
     _patchChatFormula(message, html);
 });

@@ -82,7 +82,7 @@
                         <div class="grid-3col">
                             {{#each system.conhecimentos as |val key|}}
                             <div class="stat-box outline-box" style="display:flex; flex-direction:column;">
-                                <label><a class="roll-aptidao" data-aptidao="{{key}}" data-categoria="conhecimentos"><i class="fas fa-dice-d10"></i> {{key}}</a></label>
+                                <label><a class="roll-aptidao" data-aptidao="{{key}}" data-categoria="conhecimentos"><i class="fas fa-dice-d10"></i> {{capitalize key}}</a></label>
                                 <select class="instinto-combinar" style="flex:1; width:100%; border:1px solid #ccc; font-size:10px;">
                                     <option value="">(Instinto)</option>
                                     <option value="influencia">Influência</option>
@@ -103,7 +103,7 @@
                         <div class="grid-3col">
                             {{#each system.praticas as |val key|}}
                             <div class="stat-box outline-box-red" style="display:flex; flex-direction:column;">
-                                <label><a class="roll-aptidao" data-aptidao="{{key}}" data-categoria="praticas"><i class="fas fa-dice-d10"></i> {{key}}</a></label>
+                                <label><a class="roll-aptidao" data-aptidao="{{key}}" data-categoria="praticas"><i class="fas fa-dice-d10"></i> {{capitalize key}}</a></label>
                                 <select class="instinto-combinar" style="flex:1; width:100%; border:1px solid #ccc; font-size:10px;">
                                     <option value="">(Instinto)</option>
                                     <option value="influencia">Influência</option>

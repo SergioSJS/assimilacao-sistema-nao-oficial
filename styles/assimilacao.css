@@ -53,11 +53,15 @@
 }
 
 
-.infectado input, .infectado select, .infectado textarea {
+.infectado input,
+.infectado select,
+.infectado textarea {
     color: var(--assimilacao-dark) !important;
     background: transparent;
 }
-.infectado input::placeholder, .infectado textarea::placeholder {
+
+.infectado input::placeholder,
+.infectado textarea::placeholder {
     color: #6a6a6a !important;
     opacity: 1;
 }
@@ -475,12 +479,30 @@
     --assimilacao-blue: #2a5a7d;
     --assimilacao-dark: #121212
 }
-.infectado .content-grid { grid-template-columns: 2fr 1fr !important; }
 
-.infectado .stat-box label { font-size: 16px !important; }
-.infectado .instinto-combinar { font-size: 14px !important; padding: 2px; height: 24px; }
-.infectado .grupo-conhecimentos h3, .infectado .grupo-praticas h3 { font-size: 20px !important; }
-.infectado .propositos textarea { resize: vertical; min-height: 40px; }
+.infectado .content-grid {
+    grid-template-columns: 2fr 1fr !important;
+}
+
+.infectado .stat-box label {
+    font-size: 16px !important;
+}
+
+.infectado .instinto-combinar {
+    font-size: 14px !important;
+    padding: 2px;
+    height: 24px;
+}
+
+.infectado .grupo-conhecimentos h3,
+.infectado .grupo-praticas h3 {
+    font-size: 20px !important;
+}
+
+.infectado .propositos textarea {
+    resize: vertical;
+    min-height: 40px;
+}
 
 /* Campos de Texto Simples (Fallback do ProseMirror) */
 .infectado .notas-textarea,
@@ -501,4 +523,101 @@
     border-color: var(--assimilacao-red) !important;
     outline: none;
     box-shadow: 0 0 5px rgba(198, 53, 39, 0.3);
+}
+
+/* ─── Chat: Seleção interativa de dados ─────────────────────────── */
+.assimilacao-chat-roll h4 {
+    font-family: 'Times New Roman', serif;
+    font-size: 15px;
+}
+
+.assim-result-summary {
+    padding: 8px 10px;
+    background: rgba(0, 0, 0, 0.06);
+    border-left: 3px solid #c8a847;
+    border-radius: 2px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.assim-pool-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.assim-die-card {
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+    min-width: 64px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.4);
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    user-select: none;
+}
+
+.assim-die-card:hover {
+    border-color: #c8a847;
+    background: rgba(200, 168, 71, 0.12);
+}
+
+.assim-die-card.selected {
+    border-color: #c8a847 !important;
+    background: rgba(200, 168, 71, 0.22) !important;
+    box-shadow: 0 0 8px rgba(200, 168, 71, 0.5);
+}
+
+/* Wrapper da imagem do dado */
+.assim-die-img-wrap {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 4px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.assim-die-face-img,
+.assim-die-frame-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.assim-die-frame-img {
+    z-index: 1;
+    pointer-events: none;
+}
+
+.assim-die-syms {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.assim-sym {
+    display: inline-block;
+    margin: 0 1px;
+}
+
+.assim-sym-a {
+    color: #2d7a2d;
+}
+
+.assim-sym-b {
+    color: #2a5a9d;
+}
+
+.assim-sym-c {
+    color: #c63527;
+}
+
+.assim-sym-vazio {
+    color: #999;
 }
