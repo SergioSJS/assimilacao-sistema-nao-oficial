@@ -43,6 +43,6 @@
     ]
   },
   "url": "https://github.com/SergioSJS/assimilacao-sistema-nao-oficial",
-  "manifest": "https://raw.githubusercontent.com/SergioSJS/assimilacao-sistema-nao-oficial/main/system.json",
+  "manifest": "https://raw.githubusercontent.com/SergioSJS/assimilacao-sistema-nao-oficial/master/system.json",
   "download": "https://github.com/SergioSJS/assimilacao-sistema-nao-oficial/releases/latest/download/assimilacao.zip"
 }
