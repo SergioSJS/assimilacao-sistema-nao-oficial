@@ -48,7 +48,7 @@ Sistema autônomo para jogar **Assimilação RPG** no [Foundry Virtual Tabletop]
 2. Vá em **Game Systems → Install System**
 3. Cole no campo _Manifest URL_:
 ```
-https://raw.githubusercontent.com/sergio-sousa/assimilacao-sistema-nao-oficial/main/system.json
+https://raw.githubusercontent.com/SergioSJS/assimilacao-sistema-nao-oficial/main/system.json
 ```
 4. Clique em **Install**
 
@@ -57,7 +57,7 @@ https://raw.githubusercontent.com/sergio-sousa/assimilacao-sistema-nao-oficial/m
 ## 💻 Desenvolvimento Local (Symlink)
 
 ```bash
-git clone https://github.com/sergio-sousa/assimilacao-sistema-nao-oficial.git
+git clone https://github.com/SergioSJS/assimilacao-sistema-nao-oficial.git
 
 # Mac/Linux
 ln -s "$(pwd)/assimilacao-sistema-nao-oficial" "$HOME/Library/Application Support/FoundryVTT/Data/systems/assimilacao"

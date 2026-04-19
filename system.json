@@ -42,7 +42,7 @@
       }
     ]
   },
-  "url": "https://github.com/sergio-sousa/assimilacao-sistema-nao-oficial",
-  "manifest": "https://raw.githubusercontent.com/sergio-sousa/assimilacao-sistema-nao-oficial/main/system.json",
-  "download": "https://github.com/sergio-sousa/assimilacao-sistema-nao-oficial/releases/latest/download/assimilacao.zip"
+  "url": "https://github.com/SergioSJS/assimilacao-sistema-nao-oficial",
+  "manifest": "https://raw.githubusercontent.com/SergioSJS/assimilacao-sistema-nao-oficial/main/system.json",
+  "download": "https://github.com/SergioSJS/assimilacao-sistema-nao-oficial/releases/latest/download/assimilacao.zip"
 }
