@@ -68,6 +68,10 @@
 
 .infectado .window-content {
     background-color: var(--bg-color) !important;
+    background-image: url("../assets/paper-bg.jpg");
+    background-size: 100% 100%;
+    background-attachment: local;
+    background-repeat: no-repeat;
     color: var(--assimilacao-dark) !important;
     padding: 15px;
     font-family: "Segoe UI", sans-serif;

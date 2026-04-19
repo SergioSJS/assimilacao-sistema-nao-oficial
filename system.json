@@ -2,7 +2,7 @@
   "id": "assimilacao",
   "title": "Assimilação RPG (Não-Oficial — Feito por Fã para Fã)",
   "description": "Adaptação não-oficial do sistema Assimilação RPG para Foundry VTT v13+, feita por Fã para Fã. Inclui ficha de personagem, rolagem de dados customizada, cabo de guerra e inventário.",
-  "version": "0.1.2",
+  "version": "0.1.5",
   "compatibility": {
     "minimum": "13",
     "verified": "14"
@@ -43,6 +43,6 @@
     ]
   },
   "url": "https://github.com/SergioSJS/assimilacao-sistema-nao-oficial",
-  "manifest": "https://raw.githubusercontent.com/SergioSJS/assimilacao-sistema-nao-oficial/master/system.json",
+  "manifest": "https://github.com/SergioSJS/assimilacao-sistema-nao-oficial/releases/latest/download/system.json",
   "download": "https://github.com/SergioSJS/assimilacao-sistema-nao-oficial/releases/latest/download/assimilacao.zip"
 }
