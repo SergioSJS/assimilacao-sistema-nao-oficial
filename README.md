@@ -1,64 +1,91 @@
-# Assimilação RPG - Módulo/Sistema Oficial para Foundry VTT
+# Assimilação RPG — Sistema para Foundry VTT
 
-Sistema autônomo (não-oficial/oficial) para jogar **Assimilação RPG** no [Foundry Virtual Tabletop](https://foundryvtt.com/). 
-Este sistema inclui as rolagens customizadas 3D, a ficha completa de personagem com automatização de saúde, regras flexíveis de inventário, controle unificado do Cabo de Guerra de Determinação/Assimilação, entre outras características do livro.
+> ⚠️ **Este é um projeto NÃO-OFICIAL feito por fã para fã.**  
+> Não é afiliado, endossado ou produzido pelos criadores do Assimilação RPG.  
+> Feito com amor para a comunidade, de graça e de código aberto.
 
-***
+Sistema autônomo para jogar **Assimilação RPG** no [Foundry Virtual Tabletop](https://foundryvtt.com/) v13+.
 
-## Pré-Requisitos
+---
 
-Para desfrutar da experiência tridimensional das faces e cálculos visuais de dados no tabuleiro, este sistema requer nativamente que você possua instalado o módulo gratuito **[Dice So Nice!](https://foundryvtt.com/packages/dice-so-nice)**. Recomenda-se ativá-lo antes de rolar qualquer teste com suas Aptidões.
+## ✅ O que está implementado
 
-## Instalação Rápida (Jogadores e Mestres)
+### Ficha de Personagem (Infectado)
+- **Frente:** Aptidões completas (Instintos, Conhecimentos e Práticas) com valores editáveis
+- **Rolagem de Instintos** — clique no nome do instinto para rolar o pool de dados D6
+- **Rolagem de Aptidões (Conhecimentos/Práticas)** — clique no nome para rolar D10 combinado com um Instinto
+- **Ação Instintiva (D12)** — checkbox que converte a próxima rolagem de Instinto para dados D12, desmarcando automaticamente após o uso
+- **Saúde** — sistema de pontos por nível com marcação de dano via clique
+- **Cabo de Guerra (Determinação × Assimilação)** — diamantes visuais e slider interativo
+- **Verso:** Propósitos Pessoais e Coletivos, Características, Assimilações/Mutações, Anotações livres
+- **Inventário** — itens divididos em Corpo e Mochila, com criação, edição e exclusão
 
-*(Ainda não disponível até o primeiro release público. Quando a v1 for gerada através da aba de Releases do GitHub, você utilizará o link abaixo).*
+### Ficha de Item (Inventário)
+- Tipo (Arma, Utilidade, Consumível, Outros)
+- Localização (Corpo ou Mochila)
+- Quantidade e Espaços/Peso
+- Campo de Descrição e Regras livre
+
+### Rolagem de Dados
+- Pool de dados customizado com faces D6, D10 e D12 com arte própria
+- Integração com **Dice So Nice!** para animação 3D
+- Resultado no chat com resumo de Sucessos e Consequências
+
+---
+
+## 🔧 Pré-Requisitos
+
+- **Foundry VTT v13+**
+- Módulo **[Dice So Nice!](https://foundryvtt.com/packages/dice-so-nice)** (obrigatório para as faces customizadas)
+
+---
+
+## 📦 Instalação
+
+*(Ainda não disponível. Quando o primeiro Release for publicado no GitHub, use o link abaixo)*
 
 1. Abra o Foundry VTT
-2. Vá em **Game Systems**
-3. Clique em **Install System**
-4. No campo _Manifest URL_, cole a URL do `system.json` gerado pelo projeto (ex: `https://raw.githubusercontent.com/SEU-USUARIO/assimilacao-sistema-nao-oficial/main/system.json`)
-5. Clique em **Install**
+2. Vá em **Game Systems → Install System**
+3. Cole no campo _Manifest URL_:
+```
+https://raw.githubusercontent.com/sergio-sousa/assimilacao-sistema-nao-oficial/main/system.json
+```
+4. Clique em **Install**
 
-## Teste Local e Desenvolvimento
+---
 
-Se você está ajudando a desenvolver ou quer apenas testar a versão atual (V1) diretamente em seu computador sem precisar esperar a pipeline publicar:
+## 💻 Desenvolvimento Local (Symlink)
 
-1. Baixe os arquivos do projeto clonando o repósitorio:
 ```bash
-git clone https://github.com/SEU-USUARIO/assimilacao-sistema-nao-oficial.git assimilacao
+git clone https://github.com/sergio-sousa/assimilacao-sistema-nao-oficial.git
+
+# Mac/Linux
+ln -s "$(pwd)/assimilacao-sistema-nao-oficial" "$HOME/Library/Application Support/FoundryVTT/Data/systems/assimilacao"
+
+# Windows (CMD como Administrador)
+mklink /D "%APPDATA%\FoundryVTT\Data\systems\assimilacao" "C:\Caminho\Para\assimilacao-sistema-nao-oficial"
 ```
-2. Instale as dependências Node (NPM) para compilar os visuais, caso queira editar alguma coisa:
+
+Reinicie o Foundry e o sistema aparecerá na lista.
+
+---
+
+## 🚀 Publicando uma Nova Versão
+
+O projeto usa GitHub Actions para gerar releases automaticamente.  
+Basta criar e enviar uma tag semântica:
+
 ```bash
-cd assimilacao
-npm install
-npm run build:css  # Isso irá gerar o styles/assimilacao.css
-```
- *(Se você apenas baixou o `.zip` gerado do repositório contendo o `styles/assimilacao.css` criado, não há necessidade do npm)*
-
-3. Conecte o sistema no Foundry:
-Crie um _Symlink_ (Atalho / Vínculo Simbólico) da pasta local onde este repositório está na sua máquina, apontando direto para a pasta `Data/systems/assimilacao` do seu diretório *Foundry User Data*. 
-
-**👉 Windows (CMD via Administrador):**
-```cmd
-mklink /D "C:\Users\VOCE\AppData\Local\FoundryVTT\Data\systems\assimilacao" "C:\Caminho\Ate\Sua\Baixada\Pasta\assimilacao-sistema-nao-oficial"
-```
-**👉 Mac/Linux (Terminal):**
-```bash
-ln -s "/Caminho/Ate/Sua/Baixada/Pasta/assimilacao-sistema-nao-oficial" "$HOME/Library/Application Support/FoundryVTT/Data/systems/assimilacao"
+git tag v0.2.0
+git push origin v0.2.0
 ```
 
-4. Reinicie o seu Foundry VTT, acesse as opções de Sistemas e ateste que **Assimilação RPG** aparece na lista. Crie um Mundo novo selecionando o sistema! 
+O CI irá empacotar o sistema, gerar o `.zip` e publicar o Release no GitHub automaticamente.
 
-***
+---
 
-## Ciclo de Release (Para Desenvolvedores)
+## 📋 Licença e Créditos
 
-O projeto possui **Integração de CI/CD** automática vinculada ao GitHub Actions.
-Toda vez que você criar e enviar (**Push**) uma *Tag* formatada em versionamento Semântico iniciando com `v*`, a automação irá compilar o CSS, zipar tudo o que interessa, atualizar as URLs de download e publicar oficialmente!
-
-Para gerar e lançar uma nova versão:
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
-O Github lançará seu .ZIP automaticamente.
+- Sistema **Assimilação RPG** criado por seus autores originais. Todo o conteúdo narrativo e de regras pertence a eles.
+- Este código é livre para uso, modificação e distribuição para fins não-comerciais.
+- Feito por **Sérgio Sousa** — [meioorc.com](https://meioorc.com)
