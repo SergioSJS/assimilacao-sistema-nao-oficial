@@ -2,7 +2,7 @@
   "id": "assimilacao",
   "title": "Assimilação RPG",
   "description": "Sistema oficial/não-oficial para Assimilação RPG no Foundry VTT v13+",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "compatibility": {
     "minimum": "13",
     "verified": "14"

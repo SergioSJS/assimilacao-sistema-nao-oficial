@@ -1,13 +1,24 @@
-import { D6_FACES, D10_FACES } from "./assimilacao-dice-faces.mjs";
+import { D6_FACES, D10_FACES, D12_FACES } from "./assimilacao-dice-faces.mjs";
 
 export async function submitAssimilacaoRoll({ actor, label, nInstinto, nAptidao = 0, tipo = "normal" }) {
     const isAssimilada = tipo === "assimilada";
+    const isMutacao = tipo === "mutacao";
     
-    // Calcula quantidades
-    const totalD6 = isAssimilada ? (nInstinto + nAptidao) : nInstinto;
-    const totalD10 = isAssimilada ? 0 : nAptidao;
+    let totalD6 = 0;
+    let totalD10 = 0;
+    let totalD12 = 0;
+
+    if (isMutacao) {
+        totalD12 = nInstinto;
+    } else if (isAssimilada) {
+        totalD12 = nInstinto + nAptidao;
+        totalD10 = 0;
+    } else {
+        totalD6 = nInstinto;
+        totalD10 = nAptidao;
+    }
     
-    if (totalD6 === 0 && totalD10 === 0) {
+    if (totalD6 === 0 && totalD10 === 0 && totalD12 === 0) {
         ui.notifications.warn("Não há dados para jogar neste teste.");
         return;
     }
@@ -15,83 +26,71 @@ export async function submitAssimilacaoRoll({ actor, label, nInstinto, nAptidao 
     const formulaParts = [];
     if (totalD6 > 0) formulaParts.push(`${totalD6}da`);
     if (totalD10 > 0) formulaParts.push(`${totalD10}db`);
+    if (totalD12 > 0) formulaParts.push(`${totalD12}dc`);
     
-    const roll = await new Roll(formulaParts.join(" + ")).evaluate();
+    if (formulaParts.length === 0) return;
+    const formulaStr = formulaParts.join(" + ");
 
-    // Parseia os resultados
-    const poolRenderData = [];
-    let melhorDado = null;
+    const roll = await new Roll(formulaStr).evaluate();
 
-    const getDieImage = (isD6, resultNum) => {
-        if (resultNum === 1 || resultNum === 2) return "systems/assimilacao/assets/images/vazio.png";
-        const prefix = isD6 ? "D6" : "D10";
-        if (resultNum === 3) return `systems/assimilacao/assets/images/${prefix}_3.png`;
-        if (resultNum === 4 || resultNum === 5) return `systems/assimilacao/assets/images/${prefix}_4_5.png`;
-        if (isD6 && resultNum === 6) return `systems/assimilacao/assets/images/${prefix}_6.png`;
-        if (!isD6 && resultNum >= 6) return `systems/assimilacao/assets/images/${prefix}_${resultNum}.png`;
-        return "systems/assimilacao/assets/images/vazio.png";
-    };
+    const flavor = isMutacao ? "Teste de Assimilação (Mutações)" : 
+                  (isAssimilada ? `Ação Instintiva <br> ${label}` : `Teste <br> ${label}`);
 
+    // Tabula resultados pros ícones sem interferir no SVG nativo
+    const poolData = [];
+    const _getMap = (f) => f === 6 ? D6_FACES : (f === 10 ? D10_FACES : D12_FACES);
+    
     roll.dice.forEach(die => {
-        const isD6 = die.faces === 6;
-        const faceMap = isD6 ? D6_FACES : D10_FACES;
-        // die.results contains an array of { result: number, active: boolean }
+        const faceMap = _getMap(die.faces);
         die.results.forEach(res => {
             if (!res.active) return;
-            const resultNum = res.result;
-            const idx = resultNum - 1;
-            const abstrato = faceMap[idx] || { a:0, b:0, c:0 };
-            
-            const dado = {
-                id: foundry.utils.randomID(),
+            const abstrato = faceMap[res.result - 1] || { a:0, b:0, c:0 };
+            poolData.push({
                 faces: die.faces,
-                resultNum,
-                a: abstrato.a,
-                b: abstrato.b,
-                c: abstrato.c,
-                imgUrl: getDieImage(isD6, resultNum),
-                classeCSS: isD6 ? "dieassimilacaod6" : "dieassimilacaod10"
-            };
-
-            poolRenderData.push(dado);
-
-            // Selecionar o melhor (Maior A. Empate em A? Maior B. Empate em B? Menor C)
-            if (!melhorDado) {
-                melhorDado = dado;
-            } else {
-                if (dado.a > melhorDado.a) {
-                    melhorDado = dado;
-                } else if (dado.a === melhorDado.a && dado.b > melhorDado.b) {
-                    melhorDado = dado;
-                } else if (dado.a === melhorDado.a && dado.b === melhorDado.b && dado.c < melhorDado.c) {
-                    melhorDado = dado;
-                }
-            }
+                result: res.result,
+                a: abstrato.a, b: abstrato.b, c: abstrato.c
+            });
         });
     });
 
-    // Assinar qual é o melhor dado pro layout
-    if (melhorDado) {
-        melhorDado.isBest = true;
+    const sortScore = (d) => (d.a * 100) + (d.b * 10) - d.c;
+    const sortedPool = poolData.sort((x, y) => sortScore(y) - sortScore(x));
+
+    let bestHtml = "";
+    if (sortedPool.length > 0) {
+        const d1 = sortedPool[0];
+        bestHtml += `<div style="text-align:center; padding: 5px; background: rgba(0,0,0,0.1); border: 1px solid #ccc; margin-bottom: 5px;">
+            <strong>Melhor Dado:</strong> Face ${d1.result} (d${d1.faces}) 
+            <br><span style="font-size:12px;">Sucessos: ${d1.a} | Assimi: ${d1.b} | Conseq: ${d1.c}</span>
+        </div>`;
+        if ((isAssimilada || isMutacao) && sortedPool.length > 1) {
+            const d2 = sortedPool[1];
+            bestHtml += `<div style="text-align:center; padding: 5px; background: rgba(0,0,0,0.1); border: 1px solid #ccc; margin-bottom: 5px;">
+                <strong>2º Melhor Dado:</strong> Face ${d2.result} (d${d2.faces})
+                <br><span style="font-size:12px;">Sucessos: ${d2.a} | Assimi: ${d2.b} | Conseq: ${d2.c}</span>
+            </div>`;
+        }
     }
 
-    const templateData = {
-        label,
-        actor: actor.name,
-        tipoLabel: isAssimilada ? "Rolagem Assimilada" : "Teste",
-        pool: poolRenderData,
-        melhorDado
-    };
+    // Pega as caixas de ferramentas originais do Foundry e injeta display block 
+    let rollHtml = await roll.render();
+    rollHtml = rollHtml.replace(/class="dice-tooltip"/g, 'class="dice-tooltip expanded" style="display: block;"');
+    // Escondemos os somatórios abstratos (16, 20) pra não confundir o jogador
+    rollHtml = rollHtml.replace(/class="dice-formula"/g, 'class="dice-formula" style="display: none;"');
+    rollHtml = rollHtml.replace(/class="dice-total"/g, 'class="dice-total" style="display: none;"');
 
-    const templateRenderer = foundry.applications?.handlebars?.renderTemplate || renderTemplate;
-    const content = await templateRenderer("systems/assimilacao/templates/chat/roll-resultado.hbs", templateData);
+    const finalContent = `
+        <div class="assimilacao-chat-roll">
+            <h4 style="margin-bottom: 5px;">${flavor}</h4>
+            <hr>
+            ${bestHtml}
+            ${rollHtml}
+        </div>
+    `;
 
-    const messageData = {
+    await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
-        content,
-        // Em Foundry V12+, messages detectam automaticamente o estilo como "roll" quando o array "rolls" é passado.
+        content: finalContent,
         rolls: [roll]
-    };
-
-    await ChatMessage.create(messageData);
+    });
 }

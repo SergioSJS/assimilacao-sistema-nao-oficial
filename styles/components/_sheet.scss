@@ -50,7 +50,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 5px; /* Minimal gap */
     }
 
     input, select {
@@ -63,12 +63,17 @@
       &:focus { border-bottom: 1px solid var(--assimilacao-dark); outline: none; box-shadow: none; }
     }
 
-    .charname {
-      margin: 0;
-      input {
+    .charname-box {
+      margin-bottom: 5px;
+      .charname-input {
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
         font-size: 28px;
         font-weight: bold;
         border-bottom: 2px solid var(--assimilacao-brown);
+        width: 100%;
+        background: transparent;
+        padding: 0;
+        margin: 0;
       }
     }
 

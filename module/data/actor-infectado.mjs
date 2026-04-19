@@ -12,6 +12,8 @@ export class InfectadoData extends foundry.abstract.TypeDataModel {
       }),
       ocupacao: new fields.StringField({ required: false, initial: "" }),
       notas: new fields.HTMLField({ required: false, initial: "" }),
+      caracteristicas: new fields.StringField({ required: false, initial: "" }),
+      mutacoes: new fields.StringField({ required: false, initial: "" }),
 
       // ─── PROPÓSITOS ───────────────────────────────────────────
       propositos: new fields.SchemaField({
@@ -49,8 +51,7 @@ export class InfectadoData extends foundry.abstract.TypeDataModel {
         furtividade:  new fields.NumberField({ integer: true, min: 0, max: 5, initial: 0, required: true }),
         manufaturas:  new fields.NumberField({ integer: true, min: 0, max: 5, initial: 0, required: true }),
         sobrevivencia:new fields.NumberField({ integer: true, min: 0, max: 5, initial: 0, required: true }),
-        veiculos:     new fields.NumberField({ integer: true, min: 0, max: 5, initial: 0, required: true }),
-      }),
+              }),
 
       // ─── CABO DE GUERRA ───────────────────────────────────────
       // Nível D + Nível E = 10 sempre. Nível E é derivado.

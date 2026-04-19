@@ -6,7 +6,7 @@ async function setupMacro() {
     const moduleVersion = game.system.version;
     const existing = game.macros.find(m => m.name === MACRO_NAME);
 
-    if (existing?.getFlag("assimilation-rpg", "version") === moduleVersion) return;
+    if (existing?.getFlag("assimilacao", "version") === moduleVersion) return;
 
     if (existing) await existing.delete();
 
@@ -16,13 +16,13 @@ async function setupMacro() {
         img: "systems/assimilacao/assets/images/icon.jpeg",
         command: macroCommand,
         scope: "global",
-        flags: { "assimilation-rpg": { version: moduleVersion } }
+        flags: { "assimilacao": { version: moduleVersion } }
     });
 }
 
 Hooks.once("init", () => {
     // Kept registered so existing worlds don't throw "unknown setting" errors
-    game.settings.register("assimilation-rpg", "macro-setup-done", {
+    game.settings.register("assimilacao", "macro-setup-done", {
         scope: "world",
         config: false,
         type: Boolean,
@@ -32,5 +32,5 @@ Hooks.once("init", () => {
 
 Hooks.once("ready", async () => {
     await setupMacro();
-    await game.settings.set("assimilation-rpg", "macro-setup-done", true);
+    await game.settings.set("assimilacao", "macro-setup-done", true);
 });

@@ -1,5 +1,10 @@
 {
   "ASSIMILACAO": {
     "SystemName": "Assimilação RPG"
+  },
+  "TYPES": {
+    "Item": {
+      "item-inventario": "Item de Inventário"
+    }
   }
 }

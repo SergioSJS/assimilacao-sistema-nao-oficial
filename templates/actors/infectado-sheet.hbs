@@ -3,7 +3,9 @@
     <header class="sheet-header">
         <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
         <div class="header-fields">
-            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Nome do Personagem"/></h1>
+            <div class="charname-box">
+                <input name="name" class="charname-input" type="text" value="{{actor.name}}" placeholder="Nome do Personagem"/>
+            </div>
             <div class="grid-2col">
                 <div class="form-group">
                     <label>Ocupação</label>
@@ -20,14 +22,7 @@
                     <input type="text" name="system.eventoMarcante" value="{{system.eventoMarcante}}" />
                 </div>
             </div>
-            <div class="propositos">
-                <label>Propósitos Pessoais</label>
-                <input type="text" name="system.propositos.pessoal1" value="{{system.propositos.pessoal1}}" placeholder="Propósito Pessoal 1"/>
-                <input type="text" name="system.propositos.pessoal2" value="{{system.propositos.pessoal2}}" placeholder="Propósito Pessoal 2"/>
-                
-                <label>Propósitos Coletivos</label>
-                <input type="text" name="system.propositos.relacional1" value="{{system.propositos.relacional1}}" placeholder="Propósito Coletivo 1"/>
-            </div>
+            
         </div>
     </header>
 
@@ -45,7 +40,12 @@
             <div class="grid-2col content-grid">
                 <!-- COLUNA ESQUERDA: APTIDÕES -->
                 <div class="col-aptidoes">
-                    <h2 class="section-title">Aptidões</h2>
+                    <div style="display:flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #ddd; margin-bottom: 15px; padding-bottom: 5px;">
+                        <h2 class="section-title" style="border: none; margin: 0; padding: 0;">Aptidões</h2>
+                        <label style="font-size: 11px; cursor: pointer; color: var(--assimilacao-red); font-weight: bold;" title="Agir por Instinto e rolar D12s">
+                            <input type="checkbox" name="flags.assimilacao.rolagemAssimilada" {{checked flags.assimilacao.rolagemAssimilada}}> Ação Instintiva (D12)
+                        </label>
+                    </div>
                     
                     <div class="grupo-instintos">
                         <h3>Instintos <i class="fas fa-square" style="color:var(--assimilacao-red);"></i></h3>
@@ -132,6 +132,8 @@
                                 <span class="badge">{{nvl.num}}</span>
                                 <strong>{{nvl.nome}}</strong>
                             </div>
+                            <!-- Tooltip CSS visual instantaneo -->
+                            <div class="saude-hover-caixa" style="display:none; position:absolute; z-index:100; background:#222; color:#fff; padding:10px; border-radius:5px; font-size:12px; width:220px; border:1px solid #a73c39; transform: translateY(-100%);">{{nvl.tooltip}}</div>
                             <div class="saude-dots" data-nivel="nivel{{nvl.num}}">
                                 {{#each nvl.dots as |dot|}}
                                     <i class="fas fa-heart saude-ponto {{#if dot.gasto}}gasto{{else}}livre{{/if}}" data-index="{{dot.index}}" title="Dano recebido"></i>
@@ -146,12 +148,36 @@
 
             <hr>
             <!-- CABO DE GUERRA BELOW SAUDE/APTIDOES -->
-            <div class="cabo-guerra-box">
-                <div class="cg-label d-label" title="{{system.pontosDeterminacao}} Pontos de Determinação disponíveis">Determinação: {{system.determinacaoNivel}}</div>
-                <div class="cg-slider">
-                    <input type="range" name="system.determinacaoNivel" min="0" max="10" value="{{system.determinacaoNivel}}" data-dtype="Number">
+            <div style="padding: 20px; border-radius: 4px; margin-top: 20px;">
+                <h3 style=" font-family: 'Times New Roman', serif; text-align: center; margin-top: 0px;">Cabo de Guerra</h3>
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 20px;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; border: 3px solid rgb(167, 60, 57); display: flex; align-items: center; justify-content: center; color: rgb(167, 60, 57); font-weight: bold; font-size: 1.2rem;">{{system.determinacaoNivel}}</div>
+                    <div style="flex: 1 1 0%; display: flex; justify-content: center; flex-wrap: wrap; gap: 2px;">
+                        {{#each cgDetDots as |dot index|}}
+                        <svg class="cg-dot" data-tipo="det" data-index="{{dot.index}}" data-opaco="{{dot.opaco}}" width="30" height="20" viewBox="0 0 40 24" style="cursor: pointer; opacity: {{#if dot.opaco}}1{{else}}0.3{{/if}}; transition: opacity 0.2s;">
+                            <path d="M20 0L0 12L20 24L40 12Z" fill="#a73c39" stroke="#a73c39" stroke-width="1"/>
+                        </svg>
+                        {{/each}}
+                    </div>
+                    <div style="width: 2px; height: 30px; background: rgb(51, 51, 51);"></div>
+                    <div style="flex: 1 1 0%; display: flex; justify-content: center; flex-wrap: wrap; gap: 2px;">
+                        {{#each cgAssDots as |dot index|}}
+                        <svg class="cg-dot" data-tipo="ass" data-index="{{dot.index}}" data-opaco="{{dot.opaco}}" width="30" height="20" viewBox="0 0 40 24" style="cursor: pointer; opacity: {{#if dot.opaco}}1{{else}}0.3{{/if}}; transition: opacity 0.2s;">
+                            <path d="M20 0L0 12L20 24L40 12Z" fill="#3b4766" stroke="#3b4766" stroke-width="1"/>
+                        </svg>
+                        {{/each}}
+                    </div>
+                    <div style="width: 40px; height: 40px; border-radius: 50%; border: 3px solid rgb(59, 71, 102); display: flex; align-items: center; justify-content: center; color: rgb(59, 71, 102); font-weight: bold; font-size: 1.2rem;">
+                        <span>{{system.assimilacaoNivel}}</span>
+                    </div>
                 </div>
-                <div class="cg-label a-label" title="{{system.pontosAssimilacao}} Pontos de Assimilação acumulados">Assimilação: {{system.assimilacaoNivel}}</div>
+                <div style=" padding: 10px; border-top: 1px dashed rgb(51, 51, 51);">
+                    <div style="display: flex; justify-content: space-between; color: rgb(136, 136, 136); font-size: 0.8rem; margin-bottom: 5px;">
+                        <span>DETERMINAÇÃO</span>
+                        <span>ASSIMILAÇÃO</span>
+                    </div>
+                    <input type="range" name="system.determinacaoNivel" min="0" max="10" value="{{system.determinacaoNivel}}" data-dtype="Number" style="width: 100%; appearance: none; height: 6px; background: linear-gradient(90deg, rgb(167, 60, 57), rgb(59, 71, 102)); outline: none; border-radius: 3px; cursor: pointer;">
+                </div>
             </div>
         </div>
 
@@ -159,11 +185,22 @@
         <div class="tab verso" data-group="primary" data-tab="verso">
             <div class="grid-2col content-grid">
                 <div class="verso-left">
-                    <h2 class="section-title">Características</h2>
-                    <textarea placeholder="Características de Personagem..."></textarea>
+                    <div class="propositos">
+                        <label>Propósitos Pessoais</label>
+                        <textarea name="system.propositos.pessoal1" placeholder="Propósito Pessoal 1">{{system.propositos.pessoal1}}</textarea>
+                        <textarea name="system.propositos.pessoal2" placeholder="Propósito Pessoal 2">{{system.propositos.pessoal2}}</textarea>
+                        
+                        <label>Propósitos Coletivos</label>
+                        <textarea name="system.propositos.relacional1" placeholder="Propósito Coletivo 1">{{system.propositos.relacional1}}</textarea>
+                    </div>
+                    <h2 class="section-title mt">Características</h2>
+                    <textarea name="system.caracteristicas" placeholder="Características de Personagem...">{{system.caracteristicas}}</textarea>
                     
                     <h2 class="section-title mt">Assimilações</h2>
-                    <textarea placeholder="Mutações..."></textarea>
+                    <textarea name="system.mutacoes" placeholder="Mutações...">{{system.mutacoes}}</textarea>
+
+                    <h2 class="section-title mt">Anotações</h2>
+                    <textarea name="system.notas" class="notas-textarea" placeholder="Anotações do Personagem...">{{system.notas}}</textarea>
                 </div>
                 
                 <div class="verso-right">
@@ -200,9 +237,6 @@
                             {{/each}}
                         </ul>
                     </div>
-
-                    <h2 class="section-title mt">Anotações</h2>
-                    {{editor system.notas target="system.notas" button=true owner=owner editable=editable}}
                 </div>
             </div>
         </div>
