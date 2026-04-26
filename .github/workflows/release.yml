@@ -32,7 +32,7 @@ jobs:
           zip -r assimilacao.zip \
             module/ templates/ lang/ assets/ \
             styles/assimilacao.css \
-            system.json
+            system.json README.md LICENSE
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

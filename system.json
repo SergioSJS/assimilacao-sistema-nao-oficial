@@ -42,6 +42,7 @@
       }
     ]
   },
+  "license": "LICENSE",
   "url": "https://github.com/SergioSJS/assimilacao-sistema-nao-oficial",
   "manifest": "https://github.com/SergioSJS/assimilacao-sistema-nao-oficial/releases/latest/download/system.json",
   "download": "https://github.com/SergioSJS/assimilacao-sistema-nao-oficial/releases/latest/download/assimilacao.zip"
